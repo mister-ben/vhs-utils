@@ -55,15 +55,9 @@
     ]
   },
   "files": [
-    "CONTRIBUTING.md",
     "es/",
     "cjs/",
-    "dist/",
-    "docs/",
-    "index.html",
-    "scripts/",
-    "src/",
-    "test/"
+    "dist/"
   ],
   "husky": {
     "hooks": {
@@ -74,18 +68,16 @@
     "*.js": "vjsstandard --fix",
     "README.md": "doctoc --notitle"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.12.5",
-    "global": "^4.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.12.8",
+    "@babel/runtime": "^7.28.4",
     "@brandonocasey/spawn-promise": "~0.2.0",
     "@videojs/babel-config": "^0.2.0",
     "@videojs/generator-helpers": "~2.0.1",
     "karma": "^5.2.3",
-    "rollup": "^2.38.0",
-    "videojs-generate-karma-config": "^8.0.1",
+    "rollup": "^2.79.2",
+    "videojs-generate-karma-config": "^8.1.0",
     "videojs-generate-rollup-config": "~7.0.0",
     "videojs-generator-verify": "~3.0.3",
     "videojs-standard": "^8.0.4"
