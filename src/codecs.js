@@ -1,4 +1,4 @@
-import window from 'global/window';
+import GlobalThis from '@ungap/global-this';
 
 const regexs = {
   // to determine mime types
@@ -213,14 +213,14 @@ export const getMimeForCodec = (codecString) => {
  *          Codec is supported
  */
 export const browserSupportsCodec = (codecString = '', withMMS = false) => (
-  window.MediaSource &&
-  window.MediaSource.isTypeSupported &&
-  window.MediaSource.isTypeSupported(getMimeForCodec(codecString))
+  GlobalThis.MediaSource &&
+  GlobalThis.MediaSource.isTypeSupported &&
+  GlobalThis.MediaSource.isTypeSupported(getMimeForCodec(codecString))
 ) || (
   withMMS &&
-  window.ManagedMediaSource &&
-  window.ManagedMediaSource.isTypeSupported &&
-  window.ManagedMediaSource.isTypeSupported(getMimeForCodec(codecString))
+  GlobalThis.ManagedMediaSource &&
+  GlobalThis.ManagedMediaSource.isTypeSupported &&
+  GlobalThis.ManagedMediaSource.isTypeSupported(getMimeForCodec(codecString))
 ) || false;
 
 export const muxerSupportsCodec = (codecString = '') => codecString.toLowerCase().split(',').every((codec) => {

@@ -1,6 +1,6 @@
-import window from 'global/window';
+import GlobalThis from '@ungap/global-this';
 
-const atob = (s) => window.atob ? window.atob(s) : Buffer.from(s, 'base64').toString('binary');
+const atob = (s) => GlobalThis.atob ? GlobalThis.atob(s) : Buffer.from(s, 'base64').toString('binary');
 
 export default function decodeB64ToUint8Array(b64Text) {
   const decodedString = atob(b64Text);

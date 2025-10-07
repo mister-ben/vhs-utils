@@ -1,5 +1,4 @@
-import window from 'global/window';
-
+import GlobalThis from '@ungap/global-this';
 const DEFAULT_LOCATION = 'https://example.com';
 
 const resolveUrl = (baseUrl, relativeUrl) => {
@@ -10,16 +9,16 @@ const resolveUrl = (baseUrl, relativeUrl) => {
 
   // if baseUrl is a data URI, ignore it and resolve everything relative to window.location
   if ((/^data:/).test(baseUrl)) {
-    baseUrl = window.location && window.location.href || '';
+    baseUrl = GlobalThis.location && GlobalThis.location.href || '';
   }
 
   const protocolLess = (/^\/\//.test(baseUrl));
   // remove location if window.location isn't available (i.e. we're in node)
   // and if baseUrl isn't an absolute url
-  const removeLocation = !window.location && !(/\/\//i).test(baseUrl);
+  const removeLocation = !GlobalThis.location && !(/\/\//i).test(baseUrl);
 
   // if the base URL is relative then combine with the current location
-  baseUrl = new window.URL(baseUrl, window.location || DEFAULT_LOCATION);
+  baseUrl = new GlobalThis.URL(baseUrl, GlobalThis.location || DEFAULT_LOCATION);
 
   const newUrl = new URL(relativeUrl, baseUrl);
 

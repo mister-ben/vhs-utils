@@ -10,10 +10,11 @@ import {
   numberToBytes,
   bytesMatch
 } from '../src/byte-helpers.js';
-import window from 'global/window';
+
+import GlobalThis from '@ungap/global-this';
 
 const arrayNames = [];
-const BigInt = window.BigInt;
+const BigInt = GlobalThis.BigInt;
 
 [
   'Array',
@@ -27,7 +28,7 @@ const BigInt = window.BigInt;
   'Float32Array',
   'Float64Array'
 ].forEach(function(name) {
-  if (window[name]) {
+  if (GlobalThis[name]) {
     arrayNames.push(name);
   }
 });
@@ -54,10 +55,10 @@ const rawBytes = toUint8([0x47, 0x40, 0x00, 0x10, 0x00, 0x00, 0xb0, 0x0d, 0x00, 
 
 QUnit.test('should function as expected', function(assert) {
   arrayNames.forEach(function(name) {
-    const testObj = name === 'Array' ? testBytes : new window[name](testBytes);
+    const testObj = name === 'Array' ? testBytes : new GlobalThis[name](testBytes);
 
     assert.equal(bytesToString(testObj), testString, `testString work as a string arg with ${name}`);
-    assert.equal(bytesToString(new window[name]()), '', `empty ${name} returns empty string`);
+    assert.equal(bytesToString(new GlobalThis[name]()), '', `empty ${name} returns empty string`);
   });
 
   assert.equal(bytesToString(), '', 'undefined returns empty string');
@@ -117,7 +118,7 @@ QUnit.test('should function as expected', function(assert) {
   });
 
   arrayNames.forEach(function(name) {
-    const testObj = name === 'Array' ? testBytes : new window[name](testBytes);
+    const testObj = name === 'Array' ? testBytes : new GlobalThis[name](testBytes);
     const uint = toUint8(testObj);
 
     assert.ok(uint instanceof Uint8Array && uint.length > 0, `converted ${name} to Uint8Array`);

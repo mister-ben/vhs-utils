@@ -1,4 +1,4 @@
-import window from 'global/window';
+import GlobalThis from '@ungap/global-this';
 
 // const log2 = Math.log2 ? Math.log2 : (x) => (Math.log(x) / Math.log(2));
 
@@ -71,7 +71,7 @@ export const toBinaryString = function(bytes) {
 
   return str;
 };
-const BigInt = window.BigInt || Number;
+const BigInt = GlobalThis.BigInt || Number;
 
 const BYTE_TABLE = [
   BigInt('0x1'),

@@ -1,6 +1,6 @@
 import QUnit from 'qunit';
-import window from 'global/window';
 import resolveUrl from '../src/resolve-url';
+import GlobalThis from '@ungap/global-this';
 
 // A modified subset of tests from https://github.com/tjenkinson/url-toolkit
 
@@ -10,9 +10,9 @@ QUnit.test('works with a selection of valid urls', function(assert) {
   let currentLocation = '';
   let currentPath = '';
 
-  if (window.location && window.location.protocol) {
-    currentLocation = window.location.protocol + '//' + window.location.host;
-    currentPath = window.location.pathname.split('/').slice(0, -1).join('/');
+  if (GlobalThis.location && GlobalThis.location.protocol) {
+    currentLocation = GlobalThis.location.protocol + '//' + GlobalThis.location.host;
+    currentPath = GlobalThis.location.pathname.split('/').slice(0, -1).join('/');
   }
 
   assert.equal(
@@ -30,7 +30,7 @@ QUnit.test('works with a selection of valid urls', function(assert) {
 
   assert.equal(
     resolveUrl('data:application/dash+xml;charset=utf-8,http%3A%2F%2Fexample.com', 'hello.m3u8'),
-    // we need to add the currentPath because we're actually working relative to window.location
+    // we need to add the currentPath because we're actually working relative to GlobalThis.location
     currentLocation + currentPath + '/hello.m3u8',
     'resolves urls relative to window when given a data base url'
   );

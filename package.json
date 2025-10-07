@@ -68,7 +68,9 @@
     "*.js": "vjsstandard --fix",
     "README.md": "doctoc --notitle"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@ungap/global-this": "^0.4.4"
+  },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/runtime": "^7.28.4",
